@@ -1,0 +1,309 @@
+import pandas as pd
+import yfinance as yf
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+from datetime import datetime
+import os
+import time
+import random
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("stock_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
+
+# List of popular Indian stocks with their tickers on NSE and BSE
+POPULAR_STOCKS = [
+    {"name": "Reliance Industries", "nse": "RELIANCE.NS", "bse": "RELIANCE.BO"},
+    {"name": "Tata Consultancy Services", "nse": "TCS.NS", "bse": "TCS.BO"},
+    {"name": "HDFC Bank", "nse": "HDFCBANK.NS", "bse": "HDFCBANK.BO"},
+    {"name": "Infosys", "nse": "INFY.NS", "bse": "INFY.BO"},
+    {"name": "ICICI Bank", "nse": "ICICIBANK.NS", "bse": "ICICIBANK.BO"},
+    {"name": "Hindustan Unilever", "nse": "HINDUNILVR.NS", "bse": "HINDUNILVR.BO"},
+    {"name": "ITC", "nse": "ITC.NS", "bse": "ITC.BO"},
+    {"name": "State Bank of India", "nse": "SBIN.NS", "bse": "SBIN.BO"},
+    {"name": "Bharti Airtel", "nse": "BHARTIARTL.NS", "bse": "BHARTIARTL.BO"},
+    {"name": "Kotak Mahindra Bank", "nse": "KOTAKBANK.NS", "bse": "KOTAKBANK.BO"},
+    {"name": "Larsen & Toubro", "nse": "LT.NS", "bse": "LT.BO"},
+    {"name": "Bajaj Finance", "nse": "BAJFINANCE.NS", "bse": "BAJFINANCE.BO"},
+    {"name": "HCL Technologies", "nse": "HCLTECH.NS", "bse": "HCLTECH.BO"},
+    {"name": "Asian Paints", "nse": "ASIANPAINT.NS", "bse": "ASIANPAINT.BO"},
+    {"name": "Maruti Suzuki", "nse": "MARUTI.NS", "bse": "MARUTI.BO"},
+    {"name": "Adani Ports", "nse": "ADANIPORTS.NS", "bse": "ADANIPORTS.BO"},
+    {"name": "Nestle India", "nse": "NESTLEIND.NS", "bse": "NESTLEIND.BO"},
+    {"name": "Sun Pharma", "nse": "SUNPHARMA.NS", "bse": "SUNPHARMA.BO"},
+    {"name": "Axis Bank", "nse": "AXISBANK.NS", "bse": "AXISBANK.BO"},
+    {"name": "Wipro", "nse": "WIPRO.NS", "bse": "WIPRO.BO"},
+    {"name": "Bajaj Auto", "nse": "BAJAJ-AUTO.NS", "bse": "BAJAJ-AUTO.BO"},
+    {"name": "Adani Enterprises", "nse": "ADANIENT.NS", "bse": "ADANIENT.BO"},
+    {"name": "Titan Company", "nse": "TITAN.NS", "bse": "TITAN.BO"},
+    {"name": "HDFC Life", "nse": "HDFCLIFE.NS", "bse": "HDFCLIFE.BO"},
+    {"name": "Power Grid Corporation", "nse": "POWERGRID.NS", "bse": "POWERGRID.BO"}
+]
+
+def create_output_folders():
+    """Create folders for storing data and charts"""
+    folders = ["data", "charts"]
+    for folder in folders:
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+            logging.info(f"Created folder: {folder}")
+
+def get_daily_stock_data(stock_info, start_date='1995-01-01', end_date=None):
+    """
+    Fetch daily historical stock data for a given stock
+    
+    Parameters:
+    stock_info (dict): Dictionary containing stock name and tickers
+    start_date (str): Start date in 'YYYY-MM-DD' format
+    end_date (str): End date in 'YYYY-MM-DD' format
+    
+    Returns:
+    tuple: (pandas.DataFrame, str) - Historical stock data and the ticker used
+    """
+    if end_date is None:
+        end_date = datetime.now().strftime('%Y-%m-%d')
+    
+    # Try different ticker formats and exchanges
+    tickers_to_try = [
+        stock_info["nse"],                   # NSE format
+        stock_info["bse"],                   # BSE format
+        stock_info["nse"].replace(".NS", ""), # Plain ticker without exchange
+        stock_info["name"].replace(" ", ".") # Alternative format
+    ]
+    
+    for ticker in tickers_to_try:
+        logging.info(f"Fetching daily data for {stock_info['name']} ({ticker}) from {start_date} to {end_date}...")
+        
+        try:
+            # Add a delay before each request to avoid rate limiting
+            time.sleep(random.uniform(1.5, 3.5))
+            
+            # Set a timeout for download to prevent hanging
+            data = yf.download(
+                ticker, 
+                start=start_date, 
+                end=end_date, 
+                interval='1d', 
+                progress=False,
+                timeout=45,  # Increased timeout
+                ignore_tz=True  # Try ignoring timezone issues
+            )
+            
+            if len(data) > 0:
+                logging.info(f"Successfully retrieved {len(data)} daily records for ticker {ticker}")
+                data.reset_index(inplace=True)
+                return data, ticker
+        
+        except Exception as e:
+            logging.error(f"Error fetching data for {ticker}: {str(e)}")
+            # Continue to next ticker attempt
+    
+    # If we've tried all tickers and none worked
+    logging.warning(f"No daily data found for {stock_info['name']} on any exchange")
+    return pd.DataFrame(), ""
+
+def save_data_to_csv(data, stock_name):
+    """Save the dataframe to a CSV file"""
+    if len(data) == 0:
+        return None
+    
+    # Create a filename-friendly version of the stock name
+    safe_name = stock_name.replace(" ", "_").replace("&", "and").lower()
+    filename = f"data/{safe_name}_daily.csv"
+    
+    try:
+        data.to_csv(filename, index=False)
+        logging.info(f"Data saved to {filename}")
+        return filename
+    except Exception as e:
+        logging.error(f"Error saving data to CSV for {stock_name}: {str(e)}")
+        return None
+
+def plot_closing_prices(data, stock_name, ticker):
+    """Create a plot of daily closing prices"""
+    if len(data) == 0:
+        return
+    
+    try:
+        # Create a new figure to ensure clean state
+        plt.figure(figsize=(12, 6))
+        plt.plot(data['Date'], data['Close'])
+        
+        # Create title and filename
+        title = f"{stock_name} ({ticker}) Daily Closing Prices (2000-Present)"  # Updated year
+        safe_name = stock_name.replace(" ", "_").replace("&", "and").lower()
+        filename = f"charts/{safe_name}_daily_chart.png"
+        
+        plt.title(title)
+        plt.xlabel('Date')
+        plt.ylabel('Closing Price (INR)')
+        plt.grid(True)
+        plt.tight_layout()
+        
+        # Ensure the directory exists before saving
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        
+        # Save and close the figure
+        plt.savefig(filename)
+        plt.close('all')  # Explicitly close all figures
+        logging.info(f"Chart saved to {filename}")
+    except Exception as e:
+        logging.error(f"Error creating chart for {stock_name}: {str(e)}")
+        # Try to close any open matplotlib figures to prevent resource leaks
+        plt.close('all')
+
+def process_stock(stock_info, start_date='1995-01-01', end_date=None):
+    """Process daily data for a single stock"""
+    if end_date is None:
+        end_date = datetime.now().strftime('%Y-%m-%d')
+    
+    try:
+        # Get daily data
+        daily_data, ticker = get_daily_stock_data(stock_info, start_date, end_date)
+        
+        if len(daily_data) > 0:
+            # Save and plot daily data
+            save_data_to_csv(daily_data, stock_info["name"])
+            plot_closing_prices(daily_data, stock_info["name"], ticker)
+            
+            # Add a small delay to avoid rate limiting
+            delay = random.uniform(1, 3)
+            logging.info(f"Waiting {delay:.2f} seconds before next request...")
+            time.sleep(delay)
+            
+            return True
+        else:
+            logging.warning(f"Failed to retrieve daily data for {stock_info['name']}")
+            return False
+        
+    except Exception as e:
+        logging.error(f"Unexpected error processing {stock_info['name']}: {str(e)}")
+        return False
+
+def generate_summary(results):
+    """Generate a summary of all collected data"""
+    summary = []
+    
+    try:
+        for stock_name, success in results.items():
+            if success:
+                safe_name = stock_name.replace(" ", "_").replace("&", "and").lower()
+                file_path = f"data/{safe_name}_daily.csv"
+                
+                if os.path.exists(file_path):
+                    try:
+                        daily_df = pd.read_csv(file_path)
+                        summary.append({
+                            "name": stock_name,
+                            "records": len(daily_df),
+                            "earliest_date": daily_df["Date"].min() if "Date" in daily_df.columns else "N/A",
+                            "latest_date": daily_df["Date"].max() if "Date" in daily_df.columns else "N/A",
+                            "min_price": daily_df["Close"].min() if "Close" in daily_df.columns else "N/A",
+                            "max_price": daily_df["Close"].max() if "Close" in daily_df.columns else "N/A",
+                            "avg_price": daily_df["Close"].mean() if "Close" in daily_df.columns else "N/A",
+                            "data_source": "Yahoo Finance"
+                        })
+                    except Exception as e:
+                        logging.error(f"Error processing summary for {stock_name}: {str(e)}")
+        
+        # Create summary DataFrame
+        if summary:
+            summary_df = pd.DataFrame(summary)
+            summary_df.to_csv("data/summary.csv", index=False)
+            logging.info("Summary report generated at data/summary.csv")
+            return summary_df
+        else:
+            logging.warning("No data was collected, cannot generate summary.")
+            return None
+    except Exception as e:
+        logging.error(f"Error generating summary: {str(e)}")
+        return None
+
+def verify_yfinance_connection():
+    """Test connection to Yahoo Finance API"""
+    try:
+        # Try to fetch a simple, reliable ticker like Apple
+        test_data = yf.download('AAPL', period='1d', progress=False)
+        if len(test_data) > 0:
+            logging.info("Yahoo Finance API connection successful")
+            return True
+        else:
+            logging.error("Yahoo Finance API connection test returned no data")
+            return False
+    except Exception as e:
+        logging.error(f"Yahoo Finance API connection test failed: {str(e)}")
+        return False
+
+def main():
+    try:
+        logging.info("Starting stock data scraper")
+        
+        # Create necessary folders
+        create_output_folders()
+        
+        # Verify API connection before proceeding
+        if not verify_yfinance_connection():
+            logging.error("Cannot connect to Yahoo Finance API. Please check your internet connection or try again later.")
+            return
+        
+        # Get current date for end_date
+        today = datetime.now().strftime('%Y-%m-%d')
+        
+        # Check for existing data files to potentially skip already processed stocks
+        existing_files = set(os.path.splitext(os.path.basename(f))[0].replace('_daily', '') 
+                            for f in os.listdir('data') if f.endswith('.csv'))
+        
+        # Process each stock and track results
+        results = {}
+        successful_count = 0
+        total_count = len(POPULAR_STOCKS)
+        
+        for i, stock in enumerate(POPULAR_STOCKS):
+            safe_name = stock['name'].replace(" ", "_").replace("&", "and").lower()
+            
+            # Skip if already processed (uncomment to enable skipping)
+            # if safe_name in existing_files:
+            #     logging.info(f"Skipping {stock['name']} - already processed")
+            #     results[stock['name']] = True
+            #     successful_count += 1
+            #     continue
+                
+            logging.info(f"Processing stock {i+1}/{total_count}: {stock['name']} ({successful_count} successful so far)")
+            try:
+                success = process_stock(stock, start_date='2000-01-01', end_date=today)
+                results[stock['name']] = success
+                if success:
+                    successful_count += 1
+                logging.info(f"Completed processing {stock['name']} (Success: {success})\n")
+                
+                # Add longer delay between stocks to avoid API blocks
+                delay = random.uniform(3, 7)
+                logging.info(f"Waiting {delay:.2f} seconds before next stock...")
+                time.sleep(delay)
+            except Exception as e:
+                logging.error(f"Failed to process {stock['name']}: {str(e)}")
+                results[stock['name']] = False
+        
+        # Generate summary
+        summary_df = generate_summary(results)
+        
+        # Print final status
+        logging.info(f"Process completed. Successfully retrieved data for {successful_count} out of {total_count} stocks.")
+        
+        if successful_count > 0:
+            logging.info("Data is available in the 'data' folder.")
+            logging.info("Charts are available in the 'charts' folder.")
+        
+    except Exception as e:
+        logging.error(f"Critical error in main process: {str(e)}")
+
+if __name__ == "__main__":
+    main()

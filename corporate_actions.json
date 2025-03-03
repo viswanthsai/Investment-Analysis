@@ -1,0 +1,522 @@
+{
+  "reliance_industries_daily.csv": [
+    {
+      "type": "split",
+      "date": "2017-09-07",
+      "ratio": "1:2",
+      "factor": 2,
+      "description": "Stock split 1:2"
+    },
+    {
+      "type": "bonus",
+      "date": "2017-11-28",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "tata_consultancy_services_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-06-18",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    },
+    {
+      "type": "split",
+      "date": "2022-09-14",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "infosys_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2014-12-03",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    },
+    {
+      "type": "bonus",
+      "date": "2018-09-05",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "hdfc_bank_daily.csv": [
+    {
+      "type": "split",
+      "date": "2011-09-09",
+      "ratio": "5:1",
+      "factor": 5,
+      "description": "Stock split 5:1"
+    },
+    {
+      "type": "bonus",
+      "date": "2019-05-17",
+      "ratio": "2:5",
+      "factor": 1.4,
+      "description": "Bonus issue 2:5"
+    }
+  ],
+  "icici_bank_daily.csv": [
+    {
+      "type": "split",
+      "date": "2014-06-24",
+      "ratio": "2:5",
+      "factor": 2.5,
+      "description": "Stock split 2:5"
+    },
+    {
+      "type": "bonus",
+      "date": "2019-07-15",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "hindustan_unilever_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-06-03",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "itc_daily.csv": [
+    {
+      "type": "split",
+      "date": "2016-09-13",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "state_bank_of_india_daily.csv": [
+    {
+      "type": "split",
+      "date": "2014-11-22",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    },
+    {
+      "type": "bonus",
+      "date": "2017-03-14",
+      "ratio": "1:10",
+      "factor": 1.1,
+      "description": "Bonus issue 1:10"
+    }
+  ],
+  "bharti_airtel_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2019-08-22",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "kotak_mahindra_bank_daily.csv": [
+    {
+      "type": "split",
+      "date": "2015-07-15",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "larsen_and_toubro_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2017-07-15",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "bajaj_finance_daily.csv": [
+    {
+      "type": "split",
+      "date": "2016-09-10",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    },
+    {
+      "type": "bonus",
+      "date": "2018-07-10",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "hcl_technologies_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2015-12-22",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "asian_paints_daily.csv": [
+    {
+      "type": "split",
+      "date": "2013-10-30",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "maruti_suzuki_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-09-28",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "adani_ports_daily.csv": [
+    {
+      "type": "split",
+      "date": "2019-06-09",
+      "ratio": "1:2",
+      "factor": 2,
+      "description": "Stock split 1:2"
+    }
+  ],
+  "nestle_india_daily.csv": [
+    {
+      "type": "split",
+      "date": "2018-09-12",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "sun_pharma_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2013-11-29",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "axis_bank_daily.csv": [
+    {
+      "type": "split",
+      "date": "2014-10-08",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "wipro_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2017-06-14",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    },
+    {
+      "type": "bonus",
+      "date": "2019-03-07",
+      "ratio": "1:3",
+      "factor": 1.33,
+      "description": "Bonus issue 1:3"
+    }
+  ],
+  "bajaj_auto_daily.csv": [
+    {
+      "type": "split",
+      "date": "2010-04-26",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "adani_enterprises_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2021-10-11",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "titan_company_daily.csv": [
+    {
+      "type": "split",
+      "date": "2011-09-30",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "hdfc_life_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2020-10-17",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "power_grid_corporation_daily.csv": [
+    {
+      "type": "split",
+      "date": "2017-11-29",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "tata_motors_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2016-09-13",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "tata_steel_daily.csv": [
+    {
+      "type": "split",
+      "date": "2018-07-02",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "mahindra_and_mahindra_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2017-12-03",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "bajaj_finserv_daily.csv": [
+    {
+      "type": "split",
+      "date": "2018-09-27",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "tech_mahindra_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2013-09-28",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "ultratech_cement_daily.csv": [
+    {
+      "type": "split",
+      "date": "2014-07-24",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "grasim_industries_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-06-15",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "ntpc_daily.csv": [
+    {
+      "type": "split",
+      "date": "2019-10-30",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "jsw_steel_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2016-12-15",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "indusind_bank_daily.csv": [
+    {
+      "type": "split",
+      "date": "2017-07-29",
+      "ratio": "1:2",
+      "factor": 2,
+      "description": "Stock split 1:2"
+    }
+  ],
+  "cipla_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2020-09-25",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "dr_reddys_laboratories_daily.csv": [
+    {
+      "type": "split",
+      "date": "2015-06-26",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "sbi_life_insurance_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2019-11-22",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "adani_power_daily.csv": [
+    {
+      "type": "split",
+      "date": "2018-07-30",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "britannia_industries_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-09-27",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "hindalco_industries_daily.csv": [
+    {
+      "type": "split",
+      "date": "2013-11-07",
+      "ratio": "1:2",
+      "factor": 2,
+      "description": "Stock split 1:2"
+    }
+  ],
+  "eicher_motors_daily.csv": [
+    {
+      "type": "split",
+      "date": "2020-08-24",
+      "ratio": "1:10",
+      "factor": 10,
+      "description": "Stock split 1:10"
+    }
+  ],
+  "bharat_petroleum_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2017-03-14",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "coal_india_daily.csv": [
+    {
+      "type": "split",
+      "date": "2017-01-12",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    },
+    {
+      "type": "bonus",
+      "date": "2018-11-29",
+      "ratio": "1:4",
+      "factor": 1.25,
+      "description": "Bonus issue 1:4"
+    }
+  ],
+  "tata_consumer_products_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2018-06-18",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "hero_motocorp_daily.csv": [
+    {
+      "type": "split",
+      "date": "2016-08-22",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ],
+  "divis_laboratories_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2015-09-28",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "ongc_daily.csv": [
+    {
+      "type": "split",
+      "date": "2010-12-02",
+      "ratio": "1:2",
+      "factor": 2,
+      "description": "Stock split 1:2"
+    },
+    {
+      "type": "bonus",
+      "date": "2018-01-18",
+      "ratio": "1:2",
+      "factor": 1.5,
+      "description": "Bonus issue 1:2"
+    }
+  ],
+  "indian_oil_corporation_daily.csv": [
+    {
+      "type": "bonus",
+      "date": "2017-09-07",
+      "ratio": "1:1",
+      "factor": 2,
+      "description": "Bonus issue 1:1"
+    }
+  ],
+  "shree_cement_daily.csv": [
+    {
+      "type": "split",
+      "date": "2016-10-25",
+      "ratio": "1:5",
+      "factor": 5,
+      "description": "Stock split 1:5"
+    }
+  ]
+}
